@@ -1,0 +1,5 @@
+static const UINT Wall_Max_ = 1238;			//動かない壁（障害物）の出現個数
+static const UINT Move_Max_ = 91;			//動く壁の出現座標
+static const UINT Move_Max_20_ = 84;
+static const UINT Move_Max_30_ = 33;
+static const UINT hasira_Max = 500;
