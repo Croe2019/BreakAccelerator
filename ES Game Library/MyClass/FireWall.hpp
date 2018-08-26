@@ -26,6 +26,7 @@ public:
 	void Update();
 	void CloseMove();
 	void BonusMove();
+	void StopMove();
 	void PenaltyMove();
 	float OpenSpeed();
 	void BonusHit();

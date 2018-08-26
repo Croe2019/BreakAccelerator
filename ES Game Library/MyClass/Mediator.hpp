@@ -13,13 +13,15 @@ class Mediator
 {
 public:
 	Mediator(Player *player, Crystal *crystal, FireWall *fire_wall, 
-		Obstacle *obstacle, RightMoveObstacle *right_obstacle, LeftMoveObstacle *left_obstacle);
+		Obstacle *obstacle, RightMoveObstacle *right_obstacle, 
+		LeftMoveObstacle *left_obstacle, Enemy *enemy);
 	~Mediator();
 	/*“–‚½‚è”»’èˆ—*/
 	bool CrystalHit();
 	bool ObstacleHit();
 	bool RightMoveHit();
 	bool LeftMoveHit();
+	bool EnemyHit();
 private:
 	/*ŠO•”ƒNƒ‰ƒX*/
 	Player *player;

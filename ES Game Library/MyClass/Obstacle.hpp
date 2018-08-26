@@ -1,5 +1,6 @@
 #pragma once
 #include "../ESGLib.h"
+#include <vector>
 #include "GameObject.hpp"
 
 /*クリスタルの当たり判定の大きさを設定する構造体*/
@@ -27,8 +28,10 @@ public:
 	virtual void Hit();
 	virtual void Draw();
 
+
+
 	/*ゲッター*/
-	Vector3 *GetAllObstaclePosition(int* get_count);
+	std::vector<Vector3> &GetAllObstaclePosition();
 	ObstaclelHitSize GetSize();
 
 private:
@@ -37,10 +40,9 @@ private:
 	int wall_id;
 	/*読み込むファイルの行*/
 	int wall_file[8];
-	/*障害物の座標*/
-	Vector3 wall_position[MAX_WALL_NUMBER];
 	/*ファイルを読み込むための変数*/
 	StreamReader wall_position_file;
+	std::vector<Vector3> max_obstacle_position;
 
 	/*構造体宣言*/
 	struct ObstaclelHitSize depth_and_horizontal;

@@ -35,6 +35,7 @@ private:
 	SPRITE player_texture[6];
 	Vector3 serial_position;
 	int serial_index;
+	// TODO プレイヤーがブロックに当たったら無敵時間を作る
 
 	PlayerMove *player_move;
 	/*構造体宣言*/

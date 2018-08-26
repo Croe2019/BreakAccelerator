@@ -71,6 +71,7 @@ bool LeftMoveObstacle::Initialize()
 			break;
 	}
 
+	/*x軸、z軸の当たり判定の大きさを設定*/
 	depth_and_horizontal.size_x = 10.0f;
 	depth_and_horizontal.size_z = 10.0f;
 
@@ -100,22 +101,13 @@ void LeftMoveObstacle::Move()
 	}
 }
 
-int LeftMoveObstacle::Count()
-{
-	return 0;
-}
-
-void LeftMoveObstacle::Hit()
-{
-
-}
-
 /*当たり判定をの大きさを取得*/
 LeftMoveHitSize LeftMoveObstacle::GetSize()
 {
 	return this->depth_and_horizontal;
 }
 
+/*全てのクリスタルの座標を取得*/
 Vector3 *LeftMoveObstacle::GetAllLeftMovePosition(int* get_count)
 {
 	*get_count = MAX_OBSTACLE_NUMBER_LEFT;

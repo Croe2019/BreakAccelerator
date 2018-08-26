@@ -2,6 +2,13 @@
 #include "../ESGLib.h"
 #include "Player.hpp"
 
+/*敵の当たり判定の大きさを設定する構造体*/
+struct EnemyHitSize
+{
+	float size_x;
+	float size_z;
+};
+
 /*敵を管理するクラス*/
 class Enemy
 {
@@ -33,6 +40,11 @@ public:
 	void StateMove();
 	void TextureManager();
 	void Draw();
+
+	/*ゲッター*/
+	EnemyHitSize GetSize();
+	Vector3 GetPosition();
+
 private:
 	MODEL enemy_model;
 	/*テクスチャ連番用モデル*/
@@ -49,6 +61,8 @@ private:
 	/*次の状態へ変わるまでの時間管理*/
 	int interval;
 	int serial_index;
+	/*構造体宣言*/
+	struct EnemyHitSize depth_and_horizontal;
 
 	/*Playerクラスのポインタ*/
 	Player *player;

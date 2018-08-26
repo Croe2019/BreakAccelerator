@@ -1,7 +1,9 @@
 #include "Mediator.hpp"
+#include <vector>
 
 Mediator::Mediator(Player *player, Crystal *crystal, FireWall *fire_wall, 
-	Obstacle *obstacle, RightMoveObstacle *right_obstacle, LeftMoveObstacle *left_obstacle)
+	Obstacle *obstacle, RightMoveObstacle *right_obstacle, 
+	LeftMoveObstacle *left_obstacle, Enemy *enemy)
 {
 	this->player = player;
 	this->crystal = crystal;
@@ -9,6 +11,7 @@ Mediator::Mediator(Player *player, Crystal *crystal, FireWall *fire_wall,
 	this->obstacle = obstacle;
 	this->right_move_obstacle = right_obstacle;
 	this->left_move_obstacle = left_obstacle;
+	this->enemy = enemy;
 }
 
 Mediator::~Mediator()
@@ -16,6 +19,7 @@ Mediator::~Mediator()
 
 }
 
+/*クリスタルとの当たり判定*/
 bool Mediator::CrystalHit()
 {
 	/*プレイヤー、敵、障害物、ファイアウォールの当たり判定を取る
@@ -59,6 +63,7 @@ bool Mediator::CrystalHit()
 	return crystal_hit;
 }
 
+/*動かない障害物との当たり判定*/
 bool Mediator::ObstacleHit()
 {
 	/*プレイヤー、敵、障害物、ファイアウォールの当たり判定を取る
@@ -66,10 +71,7 @@ bool Mediator::ObstacleHit()
 	Vector3 player_position;
 	Vector3 obstacle_position;
 
-	Vector3 *all_obstacle_positon;
-	int location_count = 0;
-
-	all_obstacle_positon = obstacle->GetAllObstaclePosition(&location_count);
+	std::vector<Vector3>& all_obstacle_positon = obstacle->GetAllObstaclePosition();
 
 	PlayerHitSize player_depth_horizontal;
 	ObstaclelHitSize obstacle_depth_horizontal;
@@ -80,10 +82,11 @@ bool Mediator::ObstacleHit()
 
 	obstacle_depth_horizontal = obstacle->GetSize();
 
+	auto itr = all_obstacle_positon.begin();
 	bool obstacle_hit = false;
-	for (int obstacle = 0; obstacle < MAX_WALL_NUMBER; obstacle++)
+	while (itr != all_obstacle_positon.end())
 	{
-		obstacle_position = all_obstacle_positon[obstacle];
+		obstacle_position = *itr;
 
 		if (player_position.x > obstacle_position.x + obstacle_depth_horizontal.size_x ||
 			player_position.x + player_depth_horizontal.size_x < obstacle_position.x
@@ -96,12 +99,16 @@ bool Mediator::ObstacleHit()
 		{
 			fire_wall->PenaltyHit();
 			obstacle_hit = true;
+			itr = all_obstacle_positon.erase(itr);
+			continue;
 		}
+		itr++;
 	}
-
+		
 	return obstacle_hit;
 }
 
+/*右に移動する障害物との当たり判定*/
 bool Mediator::RightMoveHit()
 {
 	/*プレイヤー、敵、障害物、ファイアウォールの当たり判定を取る
@@ -145,6 +152,7 @@ bool Mediator::RightMoveHit()
 	return right_move_hit;
 }
 
+/*左に移動する障害物との当たり判定*/
 bool Mediator::LeftMoveHit()
 {
 	/*プレイヤー、敵、障害物、ファイアウォールの当たり判定を取る
@@ -186,4 +194,45 @@ bool Mediator::LeftMoveHit()
 	}
 
 	return let_move_hit;
+}
+
+/*敵との当たり判定*/
+bool Mediator::EnemyHit()
+{
+	/*プレイヤー、敵、障害物、ファイアウォールの当たり判定を取る
+	必要なもの、プレイヤー、敵、障害物、ファイアウォールの座標*/
+	Vector3 player_position;
+	Vector3 enemy_position;
+
+	Vector3 all_enemy_positon;
+
+	all_enemy_positon = enemy->GetPosition();
+
+	PlayerHitSize player_depth_horizontal;
+	EnemyHitSize enemy_depth_horizontal;
+
+	player_position = player->GetPosition();
+	player_depth_horizontal = player->GetSize();
+
+
+	enemy_depth_horizontal = enemy->GetSize();
+
+	bool enemy_hit = false;
+
+	enemy_position = all_enemy_positon;
+
+	if (player_position.x > enemy_position.x + enemy_depth_horizontal.size_x ||
+		player_position.x + player_depth_horizontal.size_x < enemy_position.x
+		|| player_position.z > enemy_position.z + enemy_depth_horizontal.size_z ||
+		player_position.z + player_depth_horizontal.size_z < enemy_position.z)
+	{
+
+	}
+	else
+	{
+		fire_wall->BonusHit();
+		enemy_hit = true;
+	}
+	
+	return enemy_hit;
 }

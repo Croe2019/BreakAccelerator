@@ -27,8 +27,6 @@ public:
 	virtual bool Initialize();
 	virtual void Update();
 	virtual void Move();
-	virtual int Count();
-	virtual void Hit();
 	virtual void Draw();
 
 	/*ÉQÉbÉ^Å[*/

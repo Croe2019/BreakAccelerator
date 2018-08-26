@@ -1,5 +1,6 @@
 #pragma once
 #include "../ESGLib.h"
+#include <vector>
 #include "GameObject.hpp"
 
 /*クリスタルの当たり判定の大きさを設定する構造体*/
@@ -22,14 +23,12 @@ public:
 	virtual ~Crystal();
 	virtual bool Initialize();
 	virtual void Update();
-	virtual int Count();
-	virtual void Hit();
 	virtual void Draw();
 
 	/*ゲッター*/
 	CrystalHitSize GetSize();
 	Vector3 GetPosition();
-	// TODO 配列を返す関数を作成
+	// 引数int* get_countは消すこと
 	Vector3 *GetAllCrystalPosition(int* get_count);
 
 private:

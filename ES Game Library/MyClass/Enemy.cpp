@@ -45,6 +45,9 @@ bool Enemy::Initialize()
 	move_state = Stop;
 	interval = 0;
 	serial_index = 0;
+	/*x軸、z軸の当たり判定の大きさを設定*/
+	depth_and_horizontal.size_x = 10.0f;
+	depth_and_horizontal.size_z = 10.0f;
 	return true;
 }
 
@@ -185,6 +188,18 @@ void Enemy::TextureManager()
 	/*3Dモデルにテクスチャを貼る*/
 	serial_index = (serial_index + 1) % 6;
 	serial_number_model->SetTexture(*texture[serial_index]);
+}
+
+/*敵のx軸、z軸の大きさを取得*/
+EnemyHitSize Enemy::GetSize()
+{
+	return this->depth_and_horizontal;
+}
+
+/*クリスタルの座標を取得*/
+Vector3 Enemy::GetPosition()
+{
+	return position;
 }
 
 /*3Dモデル描画*/

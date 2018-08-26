@@ -69,6 +69,7 @@ void FireWall::Update()
 	CloseMove();
 	BonusMove();
 	PenaltyMove();
+	StopMove();
 }
 
 /*何もしていないときは、ファイアウォールを少しずつ閉じる*/
@@ -94,6 +95,33 @@ void FireWall::CloseMove()
 				if (fire_wall_position[close_move].x >= -CLOSE_POSITION)
 				{
 					wall_state[close_move] = stop;
+				}
+			}
+		}
+	}
+}
+
+/*ファイアウォールを閉じる状態*/
+void FireWall::StopMove()
+{
+	for (int stop_move = 0; stop_move < MAX_FIREWALL_NUMBER; stop_move++)
+	{
+		if (wall_state[stop_move] == stop)
+		{
+			/*右のファイアーウォールの移動
+			elseは左のファイアーウォールの移動*/
+			if (stop_move % 2 == 0)
+			{
+				if (fire_wall_position[stop_move].x <= CLOSE_POSITION)
+				{
+					fire_wall_position[stop_move].x = CLOSE_POSITION;
+				}
+			}
+			else if (stop_move % 2 == 1)
+			{
+				if (fire_wall_position[stop_move].x >= -CLOSE_POSITION)
+				{
+					fire_wall_position[stop_move].x = -CLOSE_POSITION;
 				}
 			}
 		}

@@ -19,8 +19,6 @@ public:
 	virtual bool Initialize();
 	virtual void Update();
 	virtual void Move();
-	virtual int Count();
-	virtual void Hit();
 	virtual void Draw();
 private:
 	MODEL up_move_model;

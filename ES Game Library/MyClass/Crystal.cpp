@@ -51,6 +51,7 @@ bool Crystal::Initialize()
 		}
 	}
 	
+	/*x軸、z軸の当たり判定の大きさを設定*/
 	depth_and_horizontal.size_x = 10.0f;
 	depth_and_horizontal.size_z = 10.0f;
 
@@ -62,26 +63,19 @@ void Crystal::Update()
 
 }
 
-int Crystal::Count()
-{
-	return 0;
-}
-
-void Crystal::Hit()
-{
-	
-}
-
+/*クリスタルのx軸、z軸の大きさを取得*/
 CrystalHitSize Crystal::GetSize()
 {
 	return this->depth_and_horizontal;
 }
 
+/*クリスタルの座標を取得*/
 Vector3 Crystal::GetPosition()
 {
 	return this->crystal_position[MAX_CRYSTAL_NUMBER];
 }
 
+/*全てのクリスタルの座標を取得*/
 Vector3 *Crystal::GetAllCrystalPosition(int *get_count)
 {
 	*get_count = MAX_CRYSTAL_NUMBER;

@@ -49,7 +49,8 @@ bool GameMain::Initialize()
 	score.Initialize();
 	magnification.Initialize();
 	mediator = new Mediator(player, (Crystal*) crystal, &fire_wall, 
-		(Obstacle*) obstacle, (RightMoveObstacle*) right_move_obstacle, (LeftMoveObstacle*) left_move_obstacle);
+		(Obstacle*) obstacle, (RightMoveObstacle*) right_move_obstacle, 
+		(LeftMoveObstacle*) left_move_obstacle, enemy);
 
 	/*ƒ‰ƒCƒgİ’è*/ 
 	::ZeroMemory(&light, sizeof(light));
@@ -125,6 +126,7 @@ int GameMain::Update()
 	mediator->ObstacleHit();
 	mediator->RightMoveHit();
 	mediator->LeftMoveHit();
+	mediator->EnemyHit();
 
 	return 0;
 }

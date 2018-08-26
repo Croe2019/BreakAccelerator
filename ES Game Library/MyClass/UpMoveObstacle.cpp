@@ -99,16 +99,6 @@ void UpMoveObstacle::Move()
 	}
 }
 
-int UpMoveObstacle::Count()
-{
-	return 0;
-}
-
-void UpMoveObstacle::Hit()
-{
-
-}
-
 /*•`‰æ*/
 void UpMoveObstacle::Draw()
 {

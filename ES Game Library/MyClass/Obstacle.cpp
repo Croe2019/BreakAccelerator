@@ -39,22 +39,23 @@ bool Obstacle::Initialize()
 		{
 			if (wall_file[n] == 0)
 			{
-				wall_position[wall_id].x = -39.0f + ((11 * n));
-				wall_position[wall_id].y = 0.0f;
-				wall_position[wall_id].z = (v * 10);
-				wall_id++;
+				Vector3 position;
+				position.x = -39.0f + ((11 * n));
+				position.y = 0.0f;
+				position.z = (v * 10);
+				max_obstacle_position.push_back(position);
 			}
 		}
 	}
 
 	/*バグ回避のため適当に作成
 	※後で消す可能性あり*/
-	for (int i = wall_id; i < MAX_WALL_NUMBER; i++)
+	/*for (int i = wall_id; i < MAX_WALL_NUMBER; i++)
 	{
-		wall_position[i].x = -9999;
-		wall_position[i].y = -9999;
-		wall_position[i].z = -9999;
-	}
+		max_obstacle_position[i].x = -9999;
+		max_obstacle_position[i].y = -9999;
+		max_obstacle_position[i].z = -9999;
+	}*/
 
 	depth_and_horizontal.size_x = 10.0f;
 	depth_and_horizontal.size_z = 10.0f;
@@ -77,10 +78,9 @@ void Obstacle::Hit()
 
 }
 
-Vector3 *Obstacle::GetAllObstaclePosition(int* get_count)
+std::vector<Vector3>& Obstacle::GetAllObstaclePosition()
 {
-	*get_count = MAX_WALL_NUMBER;
-	return wall_position;
+	return max_obstacle_position;
 }
 
 ObstaclelHitSize Obstacle::GetSize()
@@ -91,9 +91,9 @@ ObstaclelHitSize Obstacle::GetSize()
 /*3Dモデル描画*/
 void Obstacle::Draw()
 {
-	for (int wall = 0; wall < MAX_WALL_NUMBER; wall++)
+	for (int wall = 0; wall < max_obstacle_position.size(); wall++)
 	{
-		wall_model->SetPosition(wall_position[wall]);
+		wall_model->SetPosition(max_obstacle_position[wall]);
 		wall_model->Draw();
 	}
 }
