@@ -164,6 +164,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="MyClass\BackGround.cpp" />
+    <ClCompile Include="MyClass\BonusParticle.cpp" />
     <ClCompile Include="MyClass\BuildingGroup.cpp" />
     <ClCompile Include="MyClass\CameraControl.cpp" />
     <ClCompile Include="MyClass\Crystal.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="GameScene\SceneShared.hpp" />
     <ClInclude Include="GameScene\TemplateScene.hpp" />
     <ClInclude Include="MyClass\BackGround.hpp" />
+    <ClInclude Include="MyClass\BonusParticle.hpp" />
     <ClInclude Include="MyClass\BuildingGroup.hpp" />
     <ClInclude Include="MyClass\CameraControl.hpp" />
     <ClInclude Include="MyClass\Crystal.hpp" />

@@ -14,6 +14,7 @@
 #include "MyClass/Mediator.hpp"
 #include "MyClass/FireWall.hpp"
 #include "MyClass/FireWallBar.hpp"
+#include "MyClass/BonusParticle.hpp"
 
 class GameMain : public CGameScene {
 public:
@@ -100,9 +101,10 @@ private:
 	Magnification magnification;
 	/*Mediatorクラス宣言*/
 	Mediator *mediator;
+	/*BonusParticleクラスのポインタ*/
+	BonusParticle *bonus_particle;
 
 	Light light;
 	
 	// 関数宣言
-
 };

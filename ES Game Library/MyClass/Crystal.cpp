@@ -43,10 +43,15 @@ bool Crystal::Initialize()
 		{
 			if (wall_x[n] == 40)
 			{
-				crystal_position[wall_id].x = -40.0f + ((11 * n));
+				Vector3 position;
+				position.x = -40.0f + ((11 * n));
+				position.y = 0.0f;
+				position.z = (v * 10);
+				max_crystal_position.push_back(position);
+				/*crystal_position[wall_id].x = -40.0f + ((11 * n));
 				crystal_position[wall_id].y = 0.0f;
 				crystal_position[wall_id].z = (v * 10);
-				wall_id++;
+				wall_id++;*/
 			}
 		}
 	}
@@ -70,25 +75,24 @@ CrystalHitSize Crystal::GetSize()
 }
 
 /*クリスタルの座標を取得*/
-Vector3 Crystal::GetPosition()
-{
-	return this->crystal_position[MAX_CRYSTAL_NUMBER];
-}
+//Vector3 Crystal::GetPosition()
+//{
+//	return this->crystal_position[MAX_CRYSTAL_NUMBER];
+//}
 
 /*全てのクリスタルの座標を取得*/
-Vector3 *Crystal::GetAllCrystalPosition(int *get_count)
+std::vector<Vector3>& Crystal::GetAllCrystalPosition()
 {
-	*get_count = MAX_CRYSTAL_NUMBER;
-	return crystal_position;
+	return max_crystal_position;
 }
 
 void Crystal::Draw()
 {
 	crystal_model->AdvanceTime(0.05f);
 	/*後でvの名前を変える*/
-	for (int crystal = 0; crystal < MAX_CRYSTAL_NUMBER; crystal++)
+	for (int crystal = 0; crystal < max_crystal_position.size(); crystal++)
 	{
-		crystal_model->SetPosition(crystal_position[crystal].x, crystal_position[crystal].y, crystal_position[crystal].z);
+		crystal_model->SetPosition(max_crystal_position[crystal].x, max_crystal_position[crystal].y, max_crystal_position[crystal].z);
 		crystal_model->Draw();
 	}
 }

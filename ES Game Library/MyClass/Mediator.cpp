@@ -3,7 +3,7 @@
 
 Mediator::Mediator(Player *player, Crystal *crystal, FireWall *fire_wall, 
 	Obstacle *obstacle, RightMoveObstacle *right_obstacle, 
-	LeftMoveObstacle *left_obstacle, Enemy *enemy)
+	LeftMoveObstacle *left_obstacle, Enemy *enemy, BonusParticle *bonus_particle)
 {
 	this->player = player;
 	this->crystal = crystal;
@@ -12,6 +12,7 @@ Mediator::Mediator(Player *player, Crystal *crystal, FireWall *fire_wall,
 	this->right_move_obstacle = right_obstacle;
 	this->left_move_obstacle = left_obstacle;
 	this->enemy = enemy;
+	this->bonus_particle = bonus_particle;
 }
 
 Mediator::~Mediator()
@@ -27,10 +28,7 @@ bool Mediator::CrystalHit()
 	Vector3 player_position;
 	Vector3 crystal_position;
 
-	Vector3 *all_crystal_positon;
-	int location_count = 0;
-
-	all_crystal_positon = crystal->GetAllCrystalPosition(&location_count);
+	std::vector<Vector3>& all_crystal_positon = crystal->GetAllCrystalPosition();
 
 	PlayerHitSize player_depth_horizontal;
 	CrystalHitSize crystal_depth_horizontal;
@@ -41,25 +39,30 @@ bool Mediator::CrystalHit()
 
 	crystal_depth_horizontal = crystal->GetSize();
 
+	auto itr = all_crystal_positon.begin();
 	bool crystal_hit = false;
-	for (int crystal = 0; crystal < MAX_CRYSTAL_NUMBER; crystal++)
+	while (itr != all_crystal_positon.end())
 	{
-		crystal_position = all_crystal_positon[crystal];
+		crystal_position = *itr;
 
 		if (player_position.x > crystal_position.x + crystal_depth_horizontal.size_x ||
 			player_position.x + player_depth_horizontal.size_x < crystal_position.x
 			|| player_position.z > crystal_position.z + crystal_depth_horizontal.size_z ||
 			player_position.z + player_depth_horizontal.size_z < crystal_position.z)
 		{
-
+			
 		}
 		else
 		{
 			fire_wall->BonusHit();
+			bonus_particle->RevertFirstState();
 			crystal_hit = true;
+			itr = all_crystal_positon.erase(itr);
+			continue;
 		}
+		itr++;
 	}
-
+		
 	return crystal_hit;
 }
 

@@ -48,15 +48,6 @@ bool Obstacle::Initialize()
 		}
 	}
 
-	/*バグ回避のため適当に作成
-	※後で消す可能性あり*/
-	/*for (int i = wall_id; i < MAX_WALL_NUMBER; i++)
-	{
-		max_obstacle_position[i].x = -9999;
-		max_obstacle_position[i].y = -9999;
-		max_obstacle_position[i].z = -9999;
-	}*/
-
 	depth_and_horizontal.size_x = 10.0f;
 	depth_and_horizontal.size_z = 10.0f;
 

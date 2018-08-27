@@ -8,13 +8,14 @@
 #include "LeftMoveObstacle.hpp"
 #include "FireWall.hpp"
 #include "Enemy.hpp"
+#include "BonusParticle.hpp"
 
 class Mediator
 {
 public:
 	Mediator(Player *player, Crystal *crystal, FireWall *fire_wall, 
 		Obstacle *obstacle, RightMoveObstacle *right_obstacle, 
-		LeftMoveObstacle *left_obstacle, Enemy *enemy);
+		LeftMoveObstacle *left_obstacle, Enemy *enemy, BonusParticle *bonus_particle);
 	~Mediator();
 	/*ìñÇΩÇËîªíËèàóù*/
 	bool CrystalHit();
@@ -32,5 +33,6 @@ private:
 	FireWall *fire_wall;
 	Enemy *enemy;
 	Field *field;
+	BonusParticle *bonus_particle;
 
 };

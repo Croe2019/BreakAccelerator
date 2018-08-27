@@ -27,9 +27,9 @@ public:
 
 	/*ゲッター*/
 	CrystalHitSize GetSize();
-	Vector3 GetPosition();
+	//Vector3 GetPosition();
 	// 引数int* get_countは消すこと
-	Vector3 *GetAllCrystalPosition(int* get_count);
+	std::vector<Vector3> &GetAllCrystalPosition();
 
 private:
 	/*クリスタルモデルの変数*/
@@ -39,8 +39,10 @@ private:
 	int wall_id;
 	/*読み込むファイルの行*/
 	int wall_x[8];
-	Vector3 crystal_position[MAX_CRYSTAL_NUMBER];
+	//Vector3 crystal_position[MAX_CRYSTAL_NUMBER];
 
 	/*構造体宣言*/
 	struct CrystalHitSize depth_and_horizontal;
+
+	std::vector<Vector3> max_crystal_position;
 };

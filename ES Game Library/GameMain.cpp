@@ -48,9 +48,11 @@ bool GameMain::Initialize()
 	fire_wall.Initialize();
 	score.Initialize();
 	magnification.Initialize();
+	bonus_particle = new BonusParticle();
+	bonus_particle->Initialize();
 	mediator = new Mediator(player, (Crystal*) crystal, &fire_wall, 
 		(Obstacle*) obstacle, (RightMoveObstacle*) right_move_obstacle, 
-		(LeftMoveObstacle*) left_move_obstacle, enemy);
+		(LeftMoveObstacle*) left_move_obstacle, enemy, bonus_particle);
 
 	/*ライト設定*/ 
 	::ZeroMemory(&light, sizeof(light));
@@ -122,11 +124,13 @@ int GameMain::Update()
 	up_move_obstacle->Update();
 	fire_wall.Update();
 	firewall_bar.Calculation(fire_wall.OpenSpeed());
+	bonus_particle->Update();
 	mediator->CrystalHit();
 	mediator->ObstacleHit();
 	mediator->RightMoveHit();
 	mediator->LeftMoveHit();
 	mediator->EnemyHit();
+	// TODO ペナルティのエフェクトも作成する
 
 	return 0;
 }
@@ -155,7 +159,7 @@ void GameMain::Draw()
 	score.Draw();
 	magnification.Draw();
 	firewall_bar.Draw();
-
+	bonus_particle->Draw();
 
 	SpriteBatch.End();
 
