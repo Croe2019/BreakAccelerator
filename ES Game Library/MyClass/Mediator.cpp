@@ -3,7 +3,8 @@
 
 Mediator::Mediator(Player *player, Crystal *crystal, FireWall *fire_wall, 
 	Obstacle *obstacle, RightMoveObstacle *right_obstacle, 
-	LeftMoveObstacle *left_obstacle, Enemy *enemy, BonusParticle *bonus_particle)
+	LeftMoveObstacle *left_obstacle, Enemy *enemy, 
+	BonusParticle *bonus_particle, PenaltyParticle *penalty_particle)
 {
 	this->player = player;
 	this->crystal = crystal;
@@ -13,6 +14,7 @@ Mediator::Mediator(Player *player, Crystal *crystal, FireWall *fire_wall,
 	this->left_move_obstacle = left_obstacle;
 	this->enemy = enemy;
 	this->bonus_particle = bonus_particle;
+	this->penalty_particle = penalty_particle;
 }
 
 Mediator::~Mediator()
@@ -101,6 +103,7 @@ bool Mediator::ObstacleHit()
 		else
 		{
 			fire_wall->PenaltyHit();
+			penalty_particle->RevertFirstState();
 			obstacle_hit = true;
 			itr = all_obstacle_positon.erase(itr);
 			continue;
@@ -148,6 +151,7 @@ bool Mediator::RightMoveHit()
 		else
 		{
 			fire_wall->PenaltyHit();
+			penalty_particle->RevertFirstState();
 			right_move_hit = true;
 		}
 	}
@@ -192,6 +196,7 @@ bool Mediator::LeftMoveHit()
 		else
 		{
 			fire_wall->PenaltyHit();
+			penalty_particle->RevertFirstState();
 			let_move_hit = true;
 		}
 	}
@@ -234,6 +239,7 @@ bool Mediator::EnemyHit()
 	else
 	{
 		fire_wall->BonusHit();
+		bonus_particle->RevertFirstState();
 		enemy_hit = true;
 	}
 	

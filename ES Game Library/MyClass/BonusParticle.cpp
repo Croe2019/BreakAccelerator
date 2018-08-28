@@ -25,7 +25,6 @@ bool BonusParticle::Initialize()
 	}
 
 	particle_id = 0;
-	particle_flag = false;
 	return true;
 }
 
@@ -58,7 +57,6 @@ void BonusParticle::Move()
 			{
 				progress_condition[k] = 1.0f;
 				particle_flag_is_draw[k] = false;
-				particle_flag = false;
 			}
 		}
 	}

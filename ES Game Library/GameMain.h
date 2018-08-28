@@ -15,6 +15,7 @@
 #include "MyClass/FireWall.hpp"
 #include "MyClass/FireWallBar.hpp"
 #include "MyClass/BonusParticle.hpp"
+#include "MyClass/PenaltyParticle.hpp"
 
 class GameMain : public CGameScene {
 public:
@@ -103,6 +104,8 @@ private:
 	Mediator *mediator;
 	/*BonusParticleクラスのポインタ*/
 	BonusParticle *bonus_particle;
+	/*PenaltyParticleクラスのポインタ*/
+	PenaltyParticle *penalty_particle;
 
 	Light light;
 	

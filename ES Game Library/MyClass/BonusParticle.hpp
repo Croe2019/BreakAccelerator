@@ -31,8 +31,6 @@ private:
 	float MAX_SPEED[MAX_PARTICLE_NUMBER];
 	/*パーティクルの集団ID*/
 	int particle_id;
-	/*パーティクル発生フラグ*/
-	bool particle_flag;
 	/*パーティクルを描画するかの判定するフラグ*/
 	bool particle_flag_is_draw[MAX_PARTICLE_NUMBER];
 

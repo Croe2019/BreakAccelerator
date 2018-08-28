@@ -177,6 +177,7 @@
     <ClCompile Include="MyClass\Magnification.cpp" />
     <ClCompile Include="MyClass\Mediator.cpp" />
     <ClCompile Include="MyClass\Obstacle.cpp" />
+    <ClCompile Include="MyClass\PenaltyParticle.cpp" />
     <ClCompile Include="MyClass\Pillar.cpp" />
     <ClCompile Include="MyClass\Player.cpp" />
     <ClCompile Include="MyClass\PlayerMove.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="MyClass\Magnification.hpp" />
     <ClInclude Include="MyClass\Mediator.hpp" />
     <ClInclude Include="MyClass\Obstacle.hpp" />
+    <ClInclude Include="MyClass\PenaltyParticle.hpp" />
     <ClInclude Include="MyClass\Pillar.hpp" />
     <ClInclude Include="MyClass\Player.hpp" />
     <ClInclude Include="MyClass\PlayerMove.hpp" />
